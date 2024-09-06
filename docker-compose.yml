@@ -1,0 +1,30 @@
+version: '3'
+services:
+  nginx:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      OIDC_PROVIDER: oidc
+
+  oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.0
+    environment:
+      - OAUTH2_PROXY_CLIENT_ID=sukjVsk9XSchGme7xojlNoplEe58qDsA
+      - OAUTH2_PROXY_CLIENT_SECRET=poQDrhVO8vapWwgPHegozWpDdEfSBeBt2KogxfUFDc7j5yXpVh4SSThzbgYfCf0P
+      - OAUTH2_PROXY_COOKIE_SECRET=0/51UUNIYecZ42tb0NpIxT/QGlkXPwz2h99D8sKdZoE=
+      - OAUTH2_PROXY_PROVIDER=oidc
+      - OAUTH2_PROXY_OIDC_ISSUER_URL=https://dev-u03f7vlzk12balm1.us.auth0.com/oauth2/default
+      - OAUTH2_PROXY_REDIRECT_URL=http://localhost/oauth2/callback
+      - OAUTH2_PROXY_WHITELIST_DOMAIN=localhost
+      - OAUTH2_PROXY_EMAIL_DOMAINS=*
+    ports:
+      - "4180:4180"
+    command:
+      - --provider=oidc
+      - --email-domain=*
+      - --cookie-secure=false
+      - --set-xauthrequest=true
+      - --pass-access-token=true
+      - --oidc-issuer-url=https://<your-okta-domain>/oauth2/default
+      - --upstream=http://localhost:80

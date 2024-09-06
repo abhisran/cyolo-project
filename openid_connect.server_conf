@@ -1,0 +1,12 @@
+location /_jwks_uri {
+    internal;
+    proxy_pass https://dev-u03f7vlzk12balm1.us.auth0.com/oauth2/default/v1/keys;
+    proxy_set_header Accept-Encoding gzip;
+}
+
+location /_token {
+    internal;
+    proxy_pass https://dev-u03f7vlzk12balm1.us.auth0.com/oauth2/default/v1/token;
+    proxy_set_header Accept-Encoding gzip;
+    proxy_set_header Content-Type "application/x-www-form-urlencoded";
+}
