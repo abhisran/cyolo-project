@@ -26,5 +26,5 @@ services:
       - --cookie-secure=false
       - --set-xauthrequest=true
       - --pass-access-token=true
-      - --oidc-issuer-url=https://<your-okta-domain>/oauth2/default
+      - --oidc-issuer-url=https://dev-u03f7vlzk12balm1.us.auth0.com/oauth2/default
       - --upstream=http://localhost:80
